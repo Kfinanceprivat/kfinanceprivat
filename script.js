@@ -25,6 +25,12 @@ const translations = {
   sim_cta:{de:"Unverbindlich anfragen", fr:"Demande sans engagement"},
   sim_disclaimer:{de:"Beispielrechnung auf Basis eines indikativen Zinssatzes von 4,9 % effektiv p.a. Kein verbindliches Angebot. Der tatsächliche Zinssatz hängt von Ihrer individuellen Bonität ab.", fr:"Simulation basée sur un taux indicatif de 4,9 % effectif annuel. Sans valeur contractuelle. Le taux réel dépend de votre profil et de votre dossier."},
 
+  advisor_eyebrow:{de:"Persönliche Beratung", fr:"Conseil personnalisé"},
+  advisor_title:{de:"Ein echter Ansprechpartner, kein Algorithmus", fr:"Un vrai interlocuteur, pas un algorithme"},
+  advisor_text:{de:"Hinter jeder Anfrage steht bei uns ein Berater, der sich Zeit nimmt, Ihr Vorhaben zu verstehen — und Ihnen eine Lösung vorschlägt, die wirklich zu Ihnen passt.", fr:"Derrière chaque demande, un conseiller prend le temps de comprendre votre projet — et vous propose une solution vraiment adaptée à votre situation."},
+  advisor_cta:{de:"Termin vereinbaren", fr:"Prendre rendez-vous"},
+  advisor_badge:{de:"Ihre Ansprechpartnerin", fr:"Votre interlocutrice dédiée"},
+
   credits_eyebrow:{de:"Unsere Angebote", fr:"Nos offres"},
   credits_title:{de:"Ein Kredit für jedes Vorhaben", fr:"Un crédit pour chaque projet"},
   credits_lead:{de:"Ob privates Vorhaben oder unternehmerisches Projekt — wir finden die passende Lösung.", fr:"Projet personnel ou professionnel — nous trouvons la solution adaptée."},
@@ -37,6 +43,8 @@ const translations = {
   c3_text:{de:"Von der Erstfinanzierung bis zur Umschuldung: individuelle Lösungen für Ihr Immobilienprojekt.", fr:"De l'achat à la renégociation : des solutions sur mesure pour votre projet immobilier."},
   c4_title:{de:"Unternehmenskredit", fr:"Crédit entreprise"},
   c4_text:{de:"Betriebsmittel, Investitionen oder Wachstum — passgenaue Finanzierung für Unternehmen jeder Größe.", fr:"Trésorerie, investissement ou croissance — un financement sur mesure pour les entreprises."},
+  c5_title:{de:"Autokredit", fr:"Crédit automobile"},
+  c5_text:{de:"Finanzierung für Neu- oder Gebrauchtwagen zu attraktiven Konditionen.", fr:"Financement pour véhicule neuf ou d'occasion à des conditions attractives."},
   c_more:{de:"Mehr erfahren", fr:"En savoir plus"},
 
   process_eyebrow:{de:"So einfach geht's", fr:"Comment ça marche"},
@@ -81,6 +89,7 @@ const translations = {
   f_type_2:{de:"Konsumkredit", fr:"Crédit à la consommation"},
   f_type_3:{de:"Immobilienkredit", fr:"Crédit immobilier"},
   f_type_4:{de:"Unternehmenskredit", fr:"Crédit entreprise"},
+  f_type_5:{de:"Autokredit", fr:"Crédit automobile"},
   f_message:{de:"Ihre Nachricht", fr:"Votre message"},
   f_submit:{de:"Anfrage senden", fr:"Envoyer la demande"},
   f_note:{de:"Ihre Anfrage wird sicher direkt an uns übermittelt.", fr:"Votre demande nous est transmise directement et en toute sécurité."},
@@ -150,11 +159,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
   /* Mobile nav */
   const burger = document.querySelector(".burger");
   const navLinks = document.querySelector(".nav-links");
+  const backdrop = document.querySelector(".nav-backdrop");
+
+  function closeMenu(){
+    navLinks.classList.remove("mobile-open");
+    burger.classList.remove("open");
+    if(backdrop) backdrop.classList.remove("show");
+  }
+  function toggleMenu(){
+    const isOpen = navLinks.classList.toggle("mobile-open");
+    burger.classList.toggle("open", isOpen);
+    if(backdrop) backdrop.classList.toggle("show", isOpen);
+  }
+
   if(burger && navLinks){
-    burger.addEventListener("click", ()=>{
-      navLinks.classList.toggle("mobile-open");
-      navLinks.style.display = navLinks.classList.contains("mobile-open") ? "flex" : "";
-    });
+    burger.addEventListener("click", toggleMenu);
+    navLinks.querySelectorAll("a").forEach(a=> a.addEventListener("click", closeMenu));
+    if(backdrop) backdrop.addEventListener("click", closeMenu);
   }
 
   /* FAQ accordion */

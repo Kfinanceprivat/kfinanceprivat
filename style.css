@@ -63,7 +63,7 @@ header.site{
   transition:box-shadow .2s ease;
 }
 header.site.scrolled{box-shadow:0 8px 24px -18px rgba(18,36,31,.5);}
-.nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
+.nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; position:relative;}
 .brand{display:flex; align-items:center; gap:12px;}
 .brand img{height:40px; width:40px;}
 .brand-word{font-family:'Fraunces', serif; font-weight:700; font-size:20px; letter-spacing:.01em;}
@@ -129,18 +129,24 @@ section{padding:96px 0;}
 .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
 
 /* Credit types */
-.credit-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+.credit-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:22px;}
 .credit-card{
   background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
-  padding:30px 26px; transition:transform .2s ease, box-shadow .2s ease;
+  overflow:hidden; transition:transform .2s ease, box-shadow .2s ease;
 }
 .credit-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
-.credit-card .icon{
-  width:48px; height:48px; border-radius:12px; background:var(--paper-alt);
-  display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+.credit-card .photo{width:100%; aspect-ratio:4/3; object-fit:cover; display:block;}
+.credit-card .photo-placeholder{
+  width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; background:var(--paper-alt);
 }
-.credit-card h3{font-size:18px; margin-bottom:8px;}
-.credit-card p{font-size:14px; margin-bottom:16px;}
+.credit-card .body{padding:24px 22px;}
+.credit-card .icon{
+  width:44px; height:44px; border-radius:11px; background:var(--paper-alt);
+  display:flex; align-items:center; justify-content:center; margin-bottom:14px; margin-top:-46px;
+  position:relative; border:3px solid var(--white);
+}
+.credit-card h3{font-size:17px; margin-bottom:8px;}
+.credit-card p{font-size:13.5px; margin-bottom:14px;}
 .credit-card a{font-size:13px; font-weight:700; color:var(--gold); display:inline-flex; align-items:center; gap:5px;}
 
 /* Process */
@@ -211,7 +217,9 @@ section{padding:96px 0;}
 
 /* CTA banner */
 .cta-banner{
-  background:linear-gradient(135deg, var(--ink), var(--ink-soft)); color:var(--paper);
+  background:linear-gradient(135deg, rgba(18,36,31,.88), rgba(29,51,43,.82)), url('photo-berlin-banner.jpg');
+  background-size:cover; background-position:center;
+  color:var(--paper);
   border-radius:24px; padding:64px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;
 }
 .cta-banner h2{color:var(--paper); font-size:30px; max-width:480px;}
@@ -262,6 +270,38 @@ footer.site a:hover{color:var(--gold);}
   .footer-grid{grid-template-columns:1fr 1fr;}
   .nav-links{display:none;}
   .burger{display:flex;}
+
+  .nav-links.mobile-open{
+    display:flex; flex-direction:column; gap:3px;
+    position:absolute; top:calc(100% + 12px); left:0; right:0;
+    background:var(--white); border:1px solid var(--line); border-radius:16px;
+    padding:12px; box-shadow:var(--shadow); z-index:150;
+    animation:navDrop .22s ease;
+  }
+  .nav-links.mobile-open a{
+    padding:15px 16px; border-radius:10px; font-size:16px; font-weight:600;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    border-bottom:none;
+  }
+  .nav-links.mobile-open a:not(:last-child){border-bottom:1px solid var(--line);}
+  .nav-links.mobile-open a::after{content:"→"; color:var(--gold); font-size:14px; flex:none;}
+  .nav-links.mobile-open a:active, .nav-links.mobile-open a:hover{background:var(--paper-alt);}
+
+  .nav-backdrop{
+    display:none; position:fixed; inset:0; background:rgba(18,36,31,.35);
+    z-index:120; backdrop-filter:blur(2px);
+  }
+  .nav-backdrop.show{display:block;}
+
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .burger span{transition:transform .2s ease, opacity .2s ease;}
+}
+
+@keyframes navDrop{
+  from{opacity:0; transform:translateY(-8px);}
+  to{opacity:1; transform:none;}
 }
 @media (max-width: 640px){
   .credit-grid, .adv-grid{grid-template-columns:1fr;}
