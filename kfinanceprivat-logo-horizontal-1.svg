@@ -1,0 +1,19 @@
+<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sceau / monogramme K -->
+  <g transform="translate(20,18) scale(1.3)">
+    <circle cx="60" cy="60" r="48" fill="none" stroke="#12241F" stroke-width="4"/>
+    <line x1="44" y1="30" x2="44" y2="90" stroke="#12241F" stroke-width="10" stroke-linecap="round"/>
+    <line x1="44" y1="60" x2="74" y2="30" stroke="#12241F" stroke-width="10" stroke-linecap="round"/>
+    <line x1="44" y1="60" x2="98" y2="102" stroke="#BE8A3D" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="215" y="95" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="46" letter-spacing="0.5">
+    <tspan fill="#BE8A3D">K</tspan><tspan fill="#12241F">FINANCE</tspan>
+  </text>
+  <text x="215" y="128" font-family="Georgia, 'Times New Roman', serif" font-weight="600" font-size="26" letter-spacing="7" fill="#12241F">PRIVAT</text>
+
+  <line x1="215" y1="142" x2="640" y2="142" stroke="#BE8A3D" stroke-width="1.5"/>
+
+  <text x="215" y="163" font-family="Arial, Helvetica, sans-serif" font-weight="500" font-size="13" letter-spacing="2" fill="#6E7268">KREDITE FÜR PRIVATPERSONEN UND UNTERNEHMEN</text>
+</svg>
